@@ -3,8 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
+    "build:wasm": "cargo build --target wasm32-unknown-unknown",
+    "build:bindgen": "wasm-bindgen target/wasm32-unknown-unknown/debug/next_app_with_wasm.wasm --out-dir build",
+    "build": "npm run build:wasm && npm run build:bindgen && next build",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,8 +17,11 @@
   "devDependencies": {
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
+    "@types/react-query": "^1.2.9",
+    "@wasm-tool/wasm-pack-plugin": "^1.6.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
+    "react-query": "^3.34.0",
     "typescript": "4.5.2"
   }
 }
